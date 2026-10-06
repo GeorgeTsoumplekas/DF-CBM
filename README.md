@@ -102,36 +102,25 @@ data/rgb/
 │   ├── val.json
 │   ├── test.json
 │   ├── original_sequences/
-│   │   ├── youtube/c23/frames/<video_id>/<frame_id>.png
-│   │   └── actors/c23/frames/<video_id>/<frame_id>.png
 │   └── manipulated_sequences/
-│       ├── Deepfakes/c23/frames/<video_id>/<frame_id>.png
-│       ├── Face2Face/c23/frames/<video_id>/<frame_id>.png
-│       ├── FaceSwap/c23/frames/<video_id>/<frame_id>.png
-│       ├── NeuralTextures/c23/frames/<video_id>/<frame_id>.png
-│       ├── FaceShifter/c23/frames/<video_id>/<frame_id>.png
-│       └── DeepFakeDetection/c23/frames/<video_id>/<frame_id>.png
+│       ├── Deepfakes/
+│       ├── Face2Face/
+│       ├── FaceSwap/
+│       ├── NeuralTextures/
+│       ├── FaceShifter/
+│       └── DeepFakeDetection/
 ├── Celeb-DF-v2/
-│   ├── YouTube-real/frames/<video_id>/<frame_id>.png
-│   ├── Celeb-real/frames/<video_id>/<frame_id>.png
-│   └── Celeb-synthesis/frames/<video_id>/<frame_id>.png
 ├── DFDC/
-│   └── test/frames/<video_id>/<frame_id>.png
 ├── DFDCP/
-│   ├── original_videos/frames/<video_id>/<frame_id>.png
-│   ├── method_A/frames/<video_id>/<frame_id>.png
-│   └── method_B/frames/<video_id>/<frame_id>.png
 ├── UADFV/
-│   ├── real/frames/<video_id>/<frame_id>.png
-│   └── fake/frames/<video_id>/<frame_id>.png
-├── blendface/ff/frames/<video_id>/<frame_id>.png
-├── e4s/ff/frames/<video_id>/<frame_id>.png
-├── facedancer/ff/frames/<video_id>/<frame_id>.png
-├── fsgan/ff/frames/<video_id>/<frame_id>.png
-├── inswap/ff/frames/<video_id>/<frame_id>.png
-├── mobileswap/ff/frames/<video_id>/<frame_id>.png
-├── simswap/ff/frames/<video_id>/<frame_id>.png
-└── uniface/ff/frames/<video_id>/<frame_id>.png
+├── blendface/
+├── e4s/
+├── facedancer/
+├── fsgan/
+├── inswap/
+├── mobileswap/
+├── simswap/
+└── uniface/
 ```
 
 ## 📊 Reproducing the results
