@@ -10,7 +10,7 @@ __pycache__/
 .venv/
 venv/
 
-data/rgb/
+data/
 weights/*
 !weights/README.md
 checkpoints/*
