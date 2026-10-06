@@ -1,0 +1,145 @@
+# DF-CBM configuration used for RegionAwareCBM (15 epochs, noise discount 0.15).
+# Paths are relative to the repository root and are resolved at load time.
+
+dataset_config:
+  rootpath: data/rgb/FaceForensics++
+  concept_label_filepath: data/concept_labels.json
+  resolution: 224
+  # A concept is kept only when both the train and test splits contain at least
+  # this many annotated frames. This selects the 6-concept vocabulary.
+  min_samples_per_concept: 750
+  train_splits: ["train", "val"]
+  test_splits: ["test"]
+  fake_subsets:
+    - Deepfakes
+    - Face2Face
+    - FaceSwap
+    - NeuralTextures
+    - FaceShifter
+
+model_config:
+  name: RegionAwareCBM
+  params:
+    embed_dim: 768
+    num_regions: 39
+    num_classes: 2
+    # num_concepts and concept_names are filled from the dataset at training time.
+    concept_region_matrix_path: data/concept_region_mapping_matrix.csv
+    clip_model: openai/clip-vit-large-patch14
+    encode_query_init: true
+    attention_dim: null
+    value_dim: null
+    hidden_dim: 768
+    shared_proj_bias: false
+    prior_strength: 1.0
+    eps: 1.0e-6
+    normalize_queries: false
+    dropout: 0.0
+    classifier_bias_init: null
+
+training_config:
+  batch_size: 128
+  num_epochs: 15
+  device: cuda
+  num_gpus: 2
+  gpu_ids: [0, 1]
+  learning_rate: 0.0002
+  concept_loss_weight: 1.0
+
+  optimizer:
+    name: AdamW
+    params:
+      weight_decay: 0.01
+      amsgrad: false
+
+  lr_scheduler:
+    name: CosineAnnealingLR
+    interval: epoch
+    frequency: 1
+    params:
+      T_max: 15
+      eta_min: 0.000001
+
+  output_dir: runs/cbm
+  run_name: null
+  checkpoint:
+    save_best_frame_auc: true
+    save_best_video_auc: true
+
+  losses:
+    class_loss:
+      name: CrossEntropyLoss
+      params: {}
+    concept_loss:
+      name: NoisyConceptBCELoss
+      params:
+        neg_weight: 1.0
+        noise_discount: 0.15
+
+feature_encoder_config:
+  resolution: 224
+  clip_input_resolution: 224
+  segface_input_resolution: 224
+  segface_backbone: segface_celeb
+  segface_encoder: swin_base
+  clip_model: openai/clip-vit-large-patch14
+  segface_model_path: weights/segface_celeba_swin_base_224.pt
+  segface_mean: [0.485, 0.456, 0.406]
+  segface_std: [0.229, 0.224, 0.225]
+  clip_mean: [0.48145466, 0.4578275, 0.40821073]
+  clip_std: [0.26862954, 0.26130258, 0.27577711]
+
+# Cross-method (DF40) and cross-dataset evaluation.
+evaluation_config:
+  dataset_json_folder: data/dataset_json
+  dataset_root_rgb: data/rgb
+  mode: test
+  compression: c23
+  resolution: 224
+  batch_size: 128
+  num_workers: 4
+  skip_missing_files: true
+
+  datasets:
+    - simswap_ff
+    - blendface_ff
+    - e4s_ff
+    - facedancer_ff
+    - fsgan_ff
+    - inswap_ff
+    - mobileswap_ff
+    - uniface_ff
+    - Celeb-DF-v2
+    - DeepFakeDetection
+    - DFDC
+    - DFDCP
+    - UADFV
+
+  label_dict:
+    CelebDFv2_real: 0
+    CelebDFv2_fake: 1
+    DFDC_Fake: 1
+    DFDC_Real: 0
+    DFDCP_Real: 0
+    DFDCP_FakeA: 1
+    DFDCP_FakeB: 1
+    UADFV_Fake: 1
+    UADFV_Real: 0
+    DFD_fake: 1
+    DFD_real: 0
+    blendface_Fake: 1
+    blendface_Real: 0
+    e4s_Fake: 1
+    e4s_Real: 0
+    facedancer_Fake: 1
+    facedancer_Real: 0
+    fsgan_Fake: 1
+    fsgan_Real: 0
+    inswap_Fake: 1
+    inswap_Real: 0
+    mobileswap_Fake: 1
+    mobileswap_Real: 0
+    uniface_Fake: 1
+    uniface_Real: 0
+    simswap_Fake: 1
+    simswap_Real: 0
