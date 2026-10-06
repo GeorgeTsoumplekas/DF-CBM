@@ -41,11 +41,11 @@ checkpoints/
 | SegFace (CelebAMask-HQ, Swin-B, 224) | [swinb_celeba_224/model_299.pt](https://huggingface.co/kartiknarayan/SegFace/blob/main/swinb_celeba_224/model_299.pt) |
 | DF-CBM | [df_cbm_best_video_auc.ckpt](https://drive.google.com/file/d/1d-k1pGSXs5U01C66ZRgUTWCxMrVCwyCy/view?usp=drive_link) |
 
-SegFace is the CelebAMask-HQ face parser from [SegFace](https://github.com/Kartik-3004/SegFace). Save the Hugging Face file as `weights/segface_celeba_swin_base_224.pt`.
+SegFace is the CelebAMask-HQ face parser from [SegFace](https://github.com/Kartik-3004/SegFace). Save the Hugging Face file as: `weights/segface_celeba_swin_base_224.pt`.
 
 ## 📂 Datasets
 
-Download the files below and place them under `data/` as follows.
+Download the files below and place them under `data/` as follows:
 
 ```text
 data/
